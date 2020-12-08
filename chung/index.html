@@ -1,0 +1,110 @@
+
+    <div class="page-title">
+                <div class="title_left">
+                    <h3 style="color: #1B5E20"><i class="fa fa-bar-chart-o"></i> Họat Động Hôm Nay</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            
+            <div class="work-day">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="report-box r1">
+                            <div class="report-icon" style="color: #fff">
+                                <i class="fas fa-concierge-bell"></i>
+                            </div>
+                            <div class="report-data">
+                                <h4 >Đang Có Khách : <span>{{dangcokhach}}</span> </h4> 
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                          <div class="report-box r2" style="background: #1B5E20">
+                              <div class="report-icon">
+                                  <i class="far fa-money-bill-alt"></i>
+                              </div>
+                              <div class="report-data">
+                                  <h4 >Tổng Hóa Đơn : <span> {{tonghoadon}}</span> </h4> 
+                              </div>
+                          </div>
+                    </div> <!-- end col -->
+
+                    
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="report-box r3">
+                            <div class="report-icon">
+                                <i class="fas fa-chart-area"></i>
+                            </div>
+                            <div class="report-data">
+                                <h4 >Doanh Thu : <span>{{doanhthu | number}} đ</span> </h4> 
+                            </div> 
+                        </div>
+                    </div> <!-- end col -->
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="report-box r4" style="background: #DA4453">
+                            <div class="report-icon">
+                               <i class="fab fa-creative-commons-nc"></i>
+                            </div>
+                            <div class="report-data">
+                                <h4>Bàn Còn Trống : <span>{{bancontrong}}</span> </h4> 
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+
+                </div> <!-- end row -->
+            </div> <!-- end work-day  -->
+                
+
+            <div class="detail-work" style="margin-top: 30px">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 30px">
+                        <div class="table-responsive">
+                            <div class="text-left">
+                                <h4 class="text-primary" style="margin-left: 10px">Món Ăn Bán Chạy</h4>
+                                <hr width="100%" style="height:2px;background: #00000045;box-shadow: 0px 0px 5px 0px;margin-bottom: 30px">
+
+                                <table width="100%"> 
+                                    <tbody >
+                                        <tr class="bc" ng-repeat="mabc in monanbanchay">
+                                            <td><b class="text-primary">{{mabc.tenmonan}}</b></td>
+                                            <td class="text-center"><div class="tsl">{{mabc.tsl}}</div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <h4 class="text-primary" style="margin-left: 10px"> Hoạt Động Gần Đây</h4>
+                            <hr width="100%" style="height:2px;background: #00000045;box-shadow: 0px 0px 5px 0px;margin-bottom: 30px">
+
+                            <table width="100%"> 
+                                <tbody >
+                                    <tr class="bc" dir-paginate="hd in hoatdongganday | itemsPerPage: 10">
+                                        <td class="xxx"><b class="text-primary">{{hd.nhanvien}}</b> <b style="margin-left: 10px"> đã bán đơn hàng trị giá</b> </td>
+                                        <td class="text-center"><div class="tsl2">{{hd.thanhtien | number}} đ</div></td>
+                                        <td>{{hd.tg}} trước. </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <dir-pagination-controls
+                            max-size="5"
+                            on-page-change="pageChangeHandler(newPageNumber)"
+                            direction-links="true"
+                            boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+
+
+
+                    
+                    
+                </div>  <!-- end row-->
+            </div>   <!-- end detail-work -->

@@ -1,0 +1,253 @@
+        <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                    <div class="x1" style="margin-bottom: 40px;">
+                        <h4 ><i class="fa fa-search"></i> Tìm kiếm</h4>
+                        <hr style="height:2px; background: #33414f6e;">
+                        <div style="margin-bottom: 10px;">
+                            <input type="text" class="form-control" placeholder="Nhập mã món ăn" ng-model="key.id">
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Nhập tên món ăn" ng-model="key.tenmonan">
+                        </div>
+                    </div>
+
+                    <div class="x2" style="margin-bottom: 20px;">
+                        <h4><i class="fa fa-filter"></i> Lọc Theo Danh Mục</h4>
+                        <hr style="height:2px; background: #33414f6e;">
+                        <div class="{{gd}}" >
+                            <input ng-model='tendanhmuc' type="text" class="form-control" placeholder="Nhập tên danh mục" style="margin-bottom: 10px">
+                        </div>
+                        <div>
+                            <button  ng-click="themdanhmuc()" class="btn btn-primary btn-sm {{gd2}}"><i class="fas fa-plus"></i></button>
+                            <button  ng-click="luuthem()" class="btn btn-primary btn-sm {{gd}}"><i class="fas fa-save"></i></button>
+                        </div>
+                       <div class="">
+                            <ul class="to_do">
+                                <li class="locdanhmuc" ng-click="loctatca()">
+                                    <p>
+                                       <i class="fas fa-angle-double-right"></i> Danh Sách Tất Cả Món 
+                                    </p>
+                                </li>
+                                <li class="locdanhmuc" ng-repeat="danhmuc in ListDanhMuc" ng-dblclick="locdanhmuc(danhmuc)" ng-init="danhmuc.display=false">
+                                     <div class="row">
+                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                            <div  ng-show="!danhmuc.display">
+                                                <i class="fas fa-angle-double-right"></i> {{danhmuc.tendanhmuc}}
+                                            </div>
+                                            <div ng-show="danhmuc.display">
+                                                <input style="color: black;border: none;width: 110px;" type="text" ng-model='danhmuc.tendanhmuc'>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  action">
+                                            <i ng-show="!danhmuc.display" ng-click="suadanhmuc(danhmuc)" class="fas fa-edit"></i>
+                                            <i ng-show="danhmuc.display" ng-click="luusuadanhmuc(danhmuc)" class="fas fa-check"></i>
+                                            <i ng-click="xoadanhmuc(danhmuc)" class="fas fa-trash-alt"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                    <h4 style="color: #1B5E20;"><i class="fa fa-list"></i> Danh Sách Sản Phẩm</h4>
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <div class="pull-right"><button ng-click="themthucan()" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm Mới</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" style="display: block;">
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title">STT</th>
+                                        <th class="column-title">Mã Món Ăn</th>
+                                        <th class="column-title">Tên Món Ăn</th>
+                                        <th class="column-title">Đơn Vị</th>
+                                        <th class="column-title">Giá Bán</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody dir-paginate="monan in ListMonAn | filter:key:strict | itemsPerPage: 17" ng-init="monan.display=false" ng-init="monan.tenfile=xxx">
+                                        <tr class="even pointer" ng-click="capnhat(monan)">
+                                            <td class=" ">{{($index + 0)  + currentPage}}</td>
+                                            <td class=" ">{{monan.id}}</td>
+                                            <td class=" ">{{monan.tenmonan}}</td>
+                                            <td class=" ">{{monan.donvi}}</td>
+                                            <td class=" ">{{monan.gia}} </td>
+                                        </tr>
+                                        <tr ng-show="monan.display">
+                                            <td colspan="5">
+                                                <div class="x_content">
+                                                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                                                        <ul class="nav nav-tabs tabs-left">
+                                                            <li class="active" ng-click="xuli()"><a data-toggle="tab" aria-expanded="true">Chi Tiết </a>
+                                                            </li>
+                                                            <li class="" ng-click="xuli2()"><a data-toggle="tab" aria-expanded="false">Cập Nhật</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+                                                        <div class="tab-content">
+
+                                                            <div class="tab-pane {{ac1}}">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped jambo_table bulk_action">
+                                                                        <tbody>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Mã Món Ăn </td>
+                                                                                <td width="90%"><b>{{monan.id}}</b></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Tên Món Ăn </td>
+                                                                                <td width="90%"><b>{{monan.tenmonan}}</b></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Giá</td>
+                                                                                <td width="90%"><b>{{monan.gia | number}} đ</b></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Đơn Vị </td>
+                                                                                <td width="90%"><b>{{monan.donvi}}</b></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Danh Mục </td>
+                                                                                <td width="90%"><b>{{monan.tendanhmuc}}</b></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Số Lượng Còn</td>
+                                                                                <td width="90%"><b>{{monan.soluongcon}}</b></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Ảnh </td>
+                                                                                <td width="90%"><img width="40px" height="50px" src="images/thucan/{{monan.avartar}}" alt=""></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%"><button ng-click="xoamonan(monan)" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Xóa</button> </td>
+                                                                                <td width=""></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane {{ac2}}">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-striped jambo_table bulk_action">
+                                                                        <tbody>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Tên Món Ăn </td>
+                                                                                <td width="90%"><input type="text" value="{{monan.tenmonan}}" ng-model="monan.tenmonan"></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Giá </td>
+                                                                                <td width="90%"><input type="text" value="{{monan.gia}}" ng-model="monan.gia"></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Đơn Vị </td>
+                                                                                <td width="90%"><input type="text" value="{{monan.donvi}}" ng-model="monan.donvi"></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Danh Mục </td>
+                                                                                <td width="90%">
+                                                                                    <select ng-model="monan.select" ng-options="danhmuc.tendanhmuc for danhmuc in ListDanhMuc"
+                                                                                    "></select>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Số Lượng Còn</td>
+                                                                                <td width="90%"><input type="text" ng-value="{{monan.soluongcon}}" ng-model="monan.soluongcon"></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td width="10%">Ảnh </td>
+                                                                                <td width="90%"><input type="file" name="files" id="{{monan.id}}"></td>
+                                                                            </tr>
+                                                                            <tr class="odd pointer">
+                                                                                <td><button ng-click="luumonan(monan)" class="btn btn-success"><i class="fa fa-file"></i> Lưu</button></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                             <dir-pagination-controls
+                                max-size="5"
+                                on-page-change="pageChangeHandler(newPageNumber)"
+                                direction-links="true"
+                                boundary-links="true">
+                            </dir-pagination-controls>
+                          </div>
+                        </div>
+                </div>
+            </div> 
+            
+            <div class="bgrfood {{dpl}}"> 
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10 col-lg-push-4 col-md-push-4 col-sm-push-3 col-xs-push-1">
+                        <div class="addfood {{dpl}}">
+                           
+                                <div class="row">
+                                    <div class="text-center">
+                                        <h3>Thêm Món Ăn</h3>
+                                        <hr width="70%" style="height:3px;background: #00000045;box-shadow: 0px 0px 5px 0px;">
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped jambo_table bulk_action">
+                                            <tbody class="text-left">
+                                                <tr class="odd pointer">
+                                                    <td width="50%">Tên Món Ăn </td>
+                                                    <td width="50%"><input type="text" ng-model="monan.tenmonan" ></td>
+                                                </tr>
+                                                <tr class="odd pointer">
+                                                    <td width="50%">Giá</td>
+                                                    <td width="50%"><input type="text" ng-model="monan.gia" ng-change="gia(monan.gia)"></td>
+                                                </tr>
+                                                <tr class="odd pointer">
+                                                    <td width="50%">Đơn Vị </td>
+                                                    <td width="50%"><input type="text" ng-model="monan.donvi"></td>
+                                                </tr>
+						 <tr class="select-style">
+                                                    <td width="50%">Danh Mục </td>
+                                                    <td width="50%">	
+                                                       <select ng-model="select" ng-options="danhmuc.tendanhmuc for danhmuc in ListDanhMuc"
+                                                       > </select>
+                                                    </td>
+                                                </tr>
+                                                <tr class="odd pointer">
+                                                    <td width="50%">Số Lượng Còn</td>
+                                                    <td width="50%"><input type="number" min="1" ng-model="monan.soluong" ng-change="soluong(monan.soluong)"></td>
+                                                </tr>
+
+                                                <tr class="odd pointer">
+                                                    <td width="10%">Ảnh </td>
+                                                    <td width="90%">
+                                                        <input type="file" name="file" id="file">	
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn btn-success" ng-click="themmonan(monan)"><i class="fas fa-check"></i></button>
+                                        <button ng-click="huy()" class="btn btn-warning"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,204 @@
+
+    <div class="page-title">
+                <div class="title_left">
+                    <h3 style="color: #1B5E20"><i class="fa fa-edit"></i> Thông Tin Bàn </h3>
+                </div>
+                <div class="text-right">
+                    <a href="table"><button style="color: #1B5E20"><i class="fa fa-mail-reply-all"></i></button></a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="x_panel" style="height: auto;">
+                        <div class="x_title">
+                            <h2>{{InfoTable[0].tenban}} - Khu Vực: {{InfoTable[0].tenkhuvuc}} </h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>  <!-- end class x_title -->
+                            
+                        <!-- content table -->
+                        <div class="x_content" style="display: block;">
+                            <br>
+                            <form class="form-horizontal form-label-left input_mask">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <h4>Đổi/Gộp Bàn</h4>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <div class="select">
+                                            <select class="form-control" ng-model="selectedTable" ng-options="table.name for table in alltable" ng-change="DoiBan(selectedTable.id)">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <h4 class="text-danger">Tổng Tiền: </h4>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <h4 class="text-danger"><b>{{tongtien | number}} đ</b></h4>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <h4>Giảm Giá: </h4>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-bottom: 10px">
+
+                                            <input value="0" type="text" class="form-control" id="inputSuccess3" placeholder="Giảm Giá" ng-model="giamgia" ng-change="khuyenmai(giamgia)">
+                                            <span class="form-control-feedback right" aria-hidden="true"> VNĐ </span>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <input value="0" type="text" class="form-control" id="inputSuccess4" placeholder="Giảm Giá" ng-model="giamgia2" ng-change="khuyenmai2(giamgia2)">
+                                            <span class="form-control-feedback right" aria-hidden="true"> % </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <h4 class="text-success">Tổng Cộng: </h4>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <h4 class="text-success"><b>{{tongcong | number}} đ</b></h4>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <h4 class="text-info">Ghi Chú: </h4>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                       <div class="ghichu" ng-show="!display">
+                                           <div class="tt">
+                                               {{InfoTable[0].ghichu}}
+                                           </div>
+                                           <span class="edit" ng-click="doi()"><i class="fas fa-pencil-alt"></i></span>
+                                       </div>
+                                       <div class="suaghichu" ng-show="display">
+                                            <textarea id="cc" class="form-control" rows="3" ng-model="gc" placeholder="notes"></textarea>
+                                            <span class="save" ng-click="luu(gc)"><i class="fa fa-check"></i></span>
+                                       </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                       
+                                        <button class="btn btn-success"><i class="fa fa-print"></i> In Hóa Đơn</button>
+                        
+                                        <button class="btn btn-success" ng-click="thanhtoan()"><i class="fa fa-check-square"></i> Thanh Toán</button>
+                                    </div>
+                                </div>
+                            
+
+                              
+                              
+                            </form>
+                        </div>  <!-- end content table -->
+                    </div>  <!-- end x_panel -->
+ 
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Danh Sách Order</h2>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                          <tr class="headings">
+                                            <th class="column-title">STT</th>
+                                            <th class="column-title">Tên Món Ăn</th>
+                                            <th class="column-title">Số Lượng</th>
+                                            <th class="column-title">Giá Bán</th>
+                                            <th class="column-title">Thành Tiền</th>
+                                            <th class="column-title no-link last"><span class="nobr"></span>
+                                            </th>
+                                            <th class="bulk-actions" colspan="7">
+                                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                            </th>
+                                          </tr>
+                                        </thead>
+
+                                        <tbody>
+                                          <tr class="even pointer" dir-paginate="order in ListOrder | itemsPerPage: 5" pagination-id="trang1">
+                                            <td class=" "> {{($index + 0) + currentPage}}</td>
+                                            <td class=" ">{{order.tenmonan}}</td>
+                                            <td class=" ">
+                                                 <input ng-blur="ThemSoLuong(order,sl)" type="number" style="width: 50px;margin-right: 5px" max="50" min="1" ng-value="{{order.soluong}}" ng-model="sl">
+                                            </td>
+                                            <td class=" ">{{order.gia | number}}</td>
+                                            <td class=" ">{{order.thanhtien | number}}</td>
+                                            <td style="cursor: pointer;" ng-click="del(order)"><i class="fa fa-trash"></i></td>
+                                            </td>
+                                          </tr>
+                                         
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <dir-pagination-controls
+                                    max-size="5"
+                                    on-page-change="pageChangeHandler(newPageNumber)"
+                                    pagination-id="trang1"
+                                    direction-links="true"
+                                    boundary-links="true">
+                                </dir-pagination-controls>
+                            </div>
+                        </div> <!-- end table-->
+                </div>  <!-- end col -->
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="select">
+                                <input type="text" class="form-control" id="inputSuccess5" ng-model="key" placeholder="Nhập tên món ăn">
+                                <span class="fa fa-search form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="select" >
+                                <select class="form-control" ng-model="selectedItem" ng-options="danhmuc.tendanhmuc for danhmuc in ListDanhMuc" ng-change="getFood(selectedItem.id)">
+                                </select>
+                            </div>
+                        </div>
+                    
+                    </div>  <!-- end row-->
+
+                    <div class="row" id='listFood'>
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6" dir-paginate="monan in ListMonAn | filter: key | itemsPerPage: 12" pagination-id="trang2">
+                            <div class="food" ng-click="AddOrder(monan)">
+                                <img src="images/thucan/{{monan.avartar}}">
+                                <div class="foot-detail">
+                                    <div class="tenmonan">
+                                        {{monan.tenmonan}}
+                                    </div>
+                                    <h5 class="text-primary">Giá: {{monan.gia | number }}đ</h5>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+
+                    </div> <!-- end row -->
+                    <dir-pagination-controls
+                        max-size="5"
+                        on-page-change="pageChangeHandler(newPageNumber)"
+                        pagination-id="trang2"
+                        direction-links="true"
+                        boundary-links="true">
+                    </dir-pagination-controls>
+                </div>
+
+
+
+
+            </div>  <!-- end row -->

@@ -1,0 +1,172 @@
+<div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                    <div class="x1" style="margin-bottom: 40px;">
+                        <h4 ><i class="fa fa-search"></i> Tìm Kiếm</h4>
+                        <hr style="height:2px; background: #33414f6e;">
+                       
+                        <div>
+                            <input type="text" class="form-control" placeholder="Nhập tên nhân viên" ng-model="key">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                    <h4 style="color: #1B5E20;"><i class="fa fa-list"></i> Danh Sách Nhân Sự</h4>
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <div class="pull-right"><button ng-click="themnv()" id='cc' class="btn btn-primary"><i class="fas fa-plus"></i> Thêm Mới</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" style="display: block;">
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-title">STT</th>
+                                        <th class="column-title">Tên Nhân Viên</th>
+                                        <th class="column-title">Email</th>
+                                        <th class="column-title">Mật Khẩu</th>
+                                        <th class="column-title">Quyền</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody ng-repeat="taikhoan in ListTaiKhoan | filter: key" ng-init="taikhoan.display = false">
+                                    <tr class="even pointer" ng-click="chitiet(taikhoan)">
+                                        <td class=" ">{{$index+1}}</td>
+                                        <td class=" ">{{taikhoan.tennhanvien}}</td>
+                                        <td class=" ">{{taikhoan.email}}</td>
+                                        <td class=" ">{{taikhoan.matkhau}}</td>
+                                        <td class=" ">{{taikhoan.level}}</td>
+                                        
+                                    </tr>
+                                    <tr ng-show="taikhoan.display">
+                                        <td colspan="8">
+                                            <div class="x_content">
+                                                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+                                                    <ul class="nav nav-tabs tabs-left">
+                                                        <li class="active" ng-click="xuli()"><a data-toggle="tab" aria-expanded="true">Chi Tiết </a>
+                                                        </li>
+                                                        <li class="" ng-click="xuli2()"><a data-toggle="tab" aria-expanded="false">Cập Nhật</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+                                                    <div class="tab-content">
+
+                                                        <div class="tab-pane {{ac1}}" id="home">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped jambo_table bulk_action">
+                                                                    <tbody>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Tên Nhân Viên </td>
+                                                                            <td width="90%"><b>{{taikhoan.tennhanvien}}</b></td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Email</td>
+                                                                            <td width="90%"><b>{{taikhoan.email}}</b></td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Mật Khẩu</td>
+                                                                            <td width="90%"><b>{{taikhoan.matkhau}}</b></td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Quyền</td>
+                                                                            <td width="90%"><b>{{taikhoan.level}}</b></td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%"><button class="btn btn-danger" ng-click="xoa(taikhoan)"><i class="fas fa-trash-alt"></i> Xóa</button> </td>
+                                                                            <td width=""></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="tab-pane {{ac2}}" id="profile">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped jambo_table bulk_action">
+                                                                    <tbody>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Tên Nhân Viên </td>
+                                                                            <td width="90%"><input type="text" value="{{taikhoan.tennhanvien}}" ng-model="taikhoan.tennhanvien"></td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Email</td>
+                                                                            <td width="90%"><input type="text" value="{{taikhoan.email}}" ng-model="taikhoan.email"></td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Mật Khẩu</td>
+                                                                            <td width="90%">
+                                                                                <input type="text" value="{{taikhoan.matkhau}}" ng-model="taikhoan.matkhau">
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td width="10%">Quyền</td>
+                                                                            <td width="90%"><select ng-model="taikhoan.select" ng-options="p.quyen for p in quyen"></select></td>
+                                                                        </tr>
+                                                                        <tr class="odd pointer">
+                                                                            <td><button ng-click="capnhattaikhoan(taikhoan)" class="btn btn-success"><i class="fa fa-file"></i> Lưu</button></td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                </div>
+            </div> 
+            
+            <div class="bgrfood {{hl}}"> 
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-10 col-lg-push-4 col-md-push-4 col-sm-push-3 col-xs-push-1">
+                        <div class="addfood {{hl}}">
+                            <div class="row">
+                                <div class="text-center">
+                                    <h3>Thêm Nhân Viên</h3>
+                                    <hr width="81%" style="height:2px;background: #00000045;box-shadow: 0px 0px 5px 0px;">
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <tbody class="text-center">
+                                            <tr class="odd pointer">
+                                                <td width="50%">Tên Nhân Viên </td>
+                                                <td width="50%"><input id="name" type="text" ng-model="name"></td>
+                                            </tr>
+                                            <tr class="odd pointer">
+                                                <td width="50%">Email</td>
+                                                <td width="50%"><input id="email" type="text" ng-model="email"></td>
+                                            </tr>
+                                            <tr class="odd pointer">
+                                                <td width="50%">Mật Khẩu</td>
+                                                <td width="50%"><input id="matkhau" type="text" ng-model="matkhau"></td>
+                                            </tr>
+                                            <tr class="odd pointer">
+                                                <td width="50%">Quyền</td>
+                                                <td width="50%"><select ng-model="Select" ng-options="q.quyen for q in quyen"></select></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-success" ng-click="luuthem(name,email,matkhau)"><i class="fas fa-check"></i></button>
+                                    <button ng-click="huythem()" id="huy" class="btn btn-warning"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

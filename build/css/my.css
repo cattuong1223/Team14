@@ -1,0 +1,398 @@
+*{}
+.hi{
+    display: none;
+}
+.report-box {
+    background: #0D47A1;
+    text-align: center;
+    padding: 30px 30px;
+    margin: 10px 10px;
+    border-radius: 5px;
+}
+.report-box h4{
+	color: #fff;
+}
+.report-icon {
+    float: left;
+    font-size: 42px;
+    min-height: 100%;
+    line-height: 10px;
+    margin-right: 20px;
+    color: #fff;
+}
+
+.detail-report{
+	padding: 10px 10px;
+}
+.info-report{
+	border: 1px solid #8fb64a;
+	padding: 10px 10px;
+}
+
+.detail-report{
+	padding: 10px 10px;
+	font-size: 15px;
+	color: #333;
+}
+.select-style{
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+
+.tb{
+    position: relative;
+    height: 100px;
+    border: 1px solid;
+    border-radius: 3px;
+    border-bottom: 5px solid #bd081c;
+    color: #bd081c;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.Active{
+    color: #156a06;
+    border-bottom: 5px solid #156a06;
+    border-top: 5px solid #156a06;
+    border-right: 10px solid #156a06;
+    border-left: 10px solid #156a06;	
+}
+.Active .ff{
+    background: #156a0699;
+}
+.Active .dpl2{
+    display: none;
+}
+
+.Empty .dpl{
+    display: none;
+}
+.mbtn{
+    font-family: tahoma;
+    font-size: 15px;
+}
+.tbname{
+    height: 40%;
+    margin-bottom: 20px; 
+}
+.tb:hover{
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 10px;
+}
+.tbkv{
+    height: 40%;
+    color: #3b5999;
+}
+.tbkv h4{
+    font-weight: 900;
+    font-family: tahoma;
+}
+
+.food {
+    border: 1px solid;
+    text-align: center;
+    padding: 10px 10px;
+    transition: all 0.5s;
+    margin: 10px 0px;
+}
+.food img {
+    width: 100%;
+    height:100px;
+    border-radius: 50%;
+    padding: 10px;
+}
+.food:hover{
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 10px;
+    cursor: pointer;
+}
+
+.fun{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    padding-top: 31px;
+    background: #bd081c7d;
+    opacity: 0;
+    transition: all 1s;
+
+}
+.tb:hover .fun{
+   opacity: 1;
+}
+.ghichu{
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+.tt {
+    height: 100px;
+    overflow: auto ;
+    border: 1px solid #cccccc;
+    text-align: justify;
+    padding-left: 10px;
+    padding-right: 30px;
+    padding-top: 10px;
+    word-wrap: break-word;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+span.edit {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #2a3f54;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+textarea#cc {
+    width: 100%;
+    height: 100%;
+}
+
+.suaghichu {
+    width: 100%;
+    height: 100px;
+    position: relative;
+}
+
+span.save {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.bodylol{
+    background: #f7f7f7;
+}
+
+
+
+/*----------------- hóa đơn------------------------*/
+.info-bill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #00000094;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.7s;
+}
+
+.content {
+    position: absolute;
+    background: #f7f7f7;
+    padding: 20px;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 5px;
+    top: 50px;
+    z-index: 99999;
+    transform: scale(0.4);
+    transition: all 1s;
+    visibility: hidden;
+}
+
+.hienlen{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+.gc{
+    text-indent: 20px;
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+    overflow: auto;
+    word-wrap: break-word;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+}
+.tenmonan{
+    width: 100%;
+    font-size: 1em;
+    color: #1c6aff;
+    white-space: nowrap;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+span#thoat {
+    font-size: 25px;
+    position: absolute;
+    right: -3px;
+    top: -8px;
+}
+
+/*------------------------- danh mục ------------------------------------------------*/
+
+.themdanhmuc{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    background: #00000000;
+    /*opacity: 0;*/
+    visibility: hidden;
+    transition: all 0.5s;
+}
+.addd {
+    width: 100%;
+    height: 200px;
+    background: #f7f7f7;
+    margin-top: 20px;
+    box-shadow: 0px 2px 10px 4px;
+    border-radius: 5px;
+    padding:0 20px;
+    transition: all 1.2s;
+    transform: translateY(-130%);
+}
+
+.hien1{
+    opacity: 1;
+    visibility: visible;
+}
+.hien2{
+    transform: translateY(0);
+}
+
+/*-------------- thuc don ---------------------------------*/
+ul.to_do>li {
+    background: #2a3f54;
+    color: white;
+}
+.locdanhmuc{
+    cursor: pointer;
+}
+li.locdanhmuc:hover {
+    transform: scale(1.1);
+}
+.action{
+    display: none;
+}
+li.locdanhmuc:hover .action{
+    display: block;
+}
+
+.bgrfood {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    visibility: hidden;
+    transition: all 1s;
+}
+
+.addfood{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background: #f7f7f7;
+    margin-top: 80px;
+    box-shadow: 0px 2px 10px 4px;
+    border-radius: 5px;
+    padding:0 40px;
+    transition: all 1.5s;
+    transform: translateY(-130%);
+}
+.hl{
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.active{
+    display: block;
+}
+.ac2{
+    display: none;
+}
+
+
+/*---------------- nhan vien --------------------------*/
+.ns{
+    display: none;
+}
+.locdanhmuc:hover .ns{
+    display: block;
+}
+
+/*----------login------------------*/
+
+.dangnhap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #f7f7f7;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+}
+.khongthanhcong{
+    display: block;
+}
+
+.thanhcong{
+    display: none;
+}
+
+
+/*---------------------------------------------*/
+tr.bc {
+    background: #f9f9f9;
+    border-bottom: 1px solid #372d2d3b;
+}
+
+tr.bc td {
+    padding: 10px 20px;
+}
+
+.tsl {
+    background: #e84e40;
+    border-radius: 3px;
+    background-clip: padding-box;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    width: 30px;
+    margin: 0 auto;
+}
+.tsl2{
+    background: #e84e40;
+    border-radius: 3px;
+    background-clip: padding-box;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    width: auto;
+    margin: 0 auto;
+}
+
+/*------------ danh mục --------------------*/
+.dm{
+    display: none;
+}
+.fas:hover{
+    transform: scale(1.5);
+}
+

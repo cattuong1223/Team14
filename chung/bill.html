@@ -1,0 +1,180 @@
+<div class="page-title">
+                <div class="title_left">
+                    <h3 style="color: #1B5E20"><i class="fas fa-edit"></i> Danh Sách Hóa Đơn </h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-9">
+                    <div class="select">
+                       <input type="date" class="form-control" id="inputSuccess3" ng-model="time">
+                       <input id="tg" type="hidden" value="{{time | date:'dd/MM/yyyy'}}">
+                    </div>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-3">
+                    <div class="select">
+                       <button class="btn btn-block btn-primary" ng-click="xuat(tg)"> <i class="fas fa-filter"></i> Lọc</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                    <div class="select">
+                        <input type="text" class="form-control" id="inputSuccess3" placeholder="Nhập mã hóa đơn" ng-model="key.id">
+                        <span class="fa fa-search form-control-feedback right" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">STT</th>
+                            <th class="column-title">Mã Hóa Đơn</th>
+                            <th class="column-title">Tên Nhân Viên</th>
+                            <th class="column-title">Vị Trí</th>
+                            <th class="column-title">Thời Gian Đến</th>
+                            <th class="column-title">Thời Gian Đi</th>
+                            <th class="column-title">Tổng Tiền</th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="even pointer" dir-paginate="bill in danhsachbill | filter: key:strict | itemsPerPage: 19"
+                          pagination-id="trang1">  
+                            <td class=" "> {{($index + 0)  + currentPage}} </td>
+                            <td class=" ">{{bill.id}}</td>
+                            <td class=" ">{{bill.nhanvien}}</i></td>
+                            <td class=" ">{{bill.tenban}}</td>
+                            <td class=" ">{{bill.thoigianden}}</td>
+                            <td class="a-right a-right ">{{bill.thoigiandi}}</td>
+                            <td class="a-right a-right ">{{bill.thanhtien | number}} đ</td>
+                            <td class=" last">
+                              <i class="fas fa-eye" style="margin-right: 5px; cursor: pointer;" title="Xem Chi Tiết" ng-click="thongtinhoadon(bill)"></i> <i ng-click="xoahoadon(bill)" class="far fa-trash-alt" style="cursor: pointer;" title="xóa"></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <dir-pagination-controls
+                        max-size="5"
+                        on-page-change="pageChangeHandler(newPageNumber)"
+                        pagination-id="trang1"
+                        direction-links="true"
+                        boundary-links="true">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+    
+            <style>
+                .fa-eye:hover,.fa-trash-alt:hover
+                {
+                    transform: scale(1.5);
+                }
+            </style>
+
+    <div class="info-bill {{hienra}}">
+        <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 col-md-push-3 col-sm-push-1 col-xs-push-1">
+                    <div class="content  {{hienra}}">
+                        <span id="thoat" ng-click="andi()"><i class="fas fa-times-circle"></i></span>
+                        <div class="row">
+                            <div class="text-center">
+                                <h3>Thông Tin Hóa Đơn</h3>
+                                <hr width="81%" style="height:2px;background: #00000045;box-shadow: 0px 0px 5px 0px;">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-md-push-1">
+                                <b>Mã Hóa Đơn : <span class="text-primary">{{mhd}}</span> </b>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-md-push-1">
+                                <b>Vị Trí : <span class="text-primary">{{vt}}</span> </b>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-md-push-1">
+                                 <b>Tên Nhân Viên :<span class="text-primary">{{tnv}}</span></b>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-md-push-1">
+                                 <b>Ngày : <span class="text-primary">{{nd}}</span></b>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-md-push-1">
+                                 <b>Thời Gian : <span class="text-primary">{{tg}}</span></b>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-md-push-1">
+                                 <b>Thành Tiền : <span class="text-primary">{{tc + km | number}} đ</span></b>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-md-push-1">
+                                 <b>Khuyến Mãi : <span class="text-primary">{{km | number}} đ</span></b>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-md-push-1">
+                                 <b>Tổng Cộng : <span class="text-primary">{{tc | number}} đ</span></b>
+                            </div>
+                            
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-1" style="margin-bottom: 15px">
+                                 <b>Ghi Chú : <div class="text-primary gc">{{gc}}</div>
+                            </div>
+                           <hr width="81%" style="height:2px;background: #00000045;box-shadow: 0px 0px 5px 0px;">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-md-push-1">
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                          <tr class="headings">
+                                            <th class="column-title">STT</th>
+                                            <th class="column-title">Tên Món Ăn</th>
+                                            <th class="column-title">Số Lượng</th>
+                                            <th class="column-title">Giá Bán</th>
+                                            <th class="column-title">Thành Tiền</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr class="even pointer" dir-paginate="order in orderhoadon | itemsPerPage: 10" pagination-id="trang2">
+                                            <td class=" "> {{($index + 0)  + currentPage2}}</td>
+                                            <td class=" ">{{order.tenmonan}}</td>
+                                            <td class=" ">{{order.soluong}}</td>
+                                            <td class=" ">{{order.gia | number}} đ</td>
+                                            <td class=" ">{{order.thanhtien | number}}đ</td>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <dir-pagination-controls
+                                    max-size="5"
+                                    pagination-id="trang2"
+                                    on-page-change="pageChangeHandler2(newPageNumber)"
+                                    direction-links="true"
+                                    boundary-links="true">
+                                </dir-pagination-controls>
+
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+        </div>
+    </div>
+
