@@ -87,6 +87,10 @@ app.config(function($routeProvider,$locationProvider) {
 		templateUrl: 'chung/employee.html',
 		controller : 'EmployeeController'
 	})
+	.when('/report',{
+		templateUrl: 'chung/report.html',
+		controller : 'ReportController'
+	})
 	.otherwise({redirectTo: '/'})
 
 })
@@ -1644,3 +1648,119 @@ app.controller('DetailController', function($scope,$http,$rootScope,$location){
     }
 
 })
+//_________________________REPORT________________________
+app.controller('ReportController', function($scope,$http,$rootScope,$location){
+
+	$http.get("backend/api/LuuThongTinDangNhap.php")
+    .then(function(response) {
+	    var ketqua = response.data;
+	    if(ketqua.trangthai != 'thanhcong')
+	    {
+	    	$rootScope.dn = "khongthanhcong";
+	    }
+	    else
+	    {
+	    	$rootScope.dn = 'thanhcong'; // test 
+	    	$rootScope.tennhanvien = ketqua.tennhanvien;
+	    	$rootScope.idtaikhoan = ketqua.idtaikhoan;
+			$rootScope.level = ketqua.level;
+			// Nếu là nhân viên sẽ ẩn các chức năng của admin
+			if(ketqua.level=="1"){
+				$rootScope.MyStyle={display:'none'};
+			}
+	    }
+	}); 
+	$scope.xuat = function()
+    {
+		tgbd = $("#tgbd").val();
+		tgkt = $("#tgkt").val();
+
+    	var data = $.param({
+				thoigianbd: tgbd,
+				thoigiankt: tgkt
+	    	}); 
+	    	var config = {
+	    		headers : {
+	    			'content-type': 'application/x-www-form-urlencoded charset=utf-8'
+	    		}
+	    	};
+
+	    	$http.post('backend/api/TKHoaDon.php', data, config).then(function(response)
+	    	{
+	    		$scope.tonghoadon = response.data;
+	    	}, function(response){
+				console.log(response.data);
+			});
+
+			$http.post('backend/api/TKDoanhThu.php', data, config).then(function(response)
+	    	{
+	    		$scope.doanhthu = response.data;
+	    	}, function(response){
+				console.log(response.data);
+			});		
+	}
+	//__________________
+	$scope.xuatChart = function()
+    {
+		
+		namTK = $("#namTK").val();
+		var data = $.param({
+			namTK:namTK
+		}); 
+		var config = {
+			headers : {
+				'content-type': 'application/x-www-form-urlencoded charset=utf-8'
+			}
+		};
+		$http.post('backend/api/TKChartNam.php', data, config).then(function(response)
+		{
+			var labels = [];
+			var result = [];
+			for (var i in response.data) {
+				labels.push(response.data[i].status);
+				result.push(response.data[i].size_status);
+			}
+			var bar = $("#myChart");
+			var myChart = new Chart(bar, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [
+						{
+							data: result,
+							borderColor: ["rgba(217, 83, 79,1)","rgba(240, 173, 78, 1)","rgba(92, 184, 92, 1)"],
+							backgroundColor: ["rgba(217, 83, 79,0.2)","rgba(240, 173, 78, 0.2)","rgba(92, 184, 92, 0.2)"],
+						}
+					],
+				},
+				options: {
+					scales: {
+						xAxes: [{
+								display: true,
+								scaleLabel: {
+									display: true,
+									labelString: 'Tháng'
+								}
+							}],
+						yAxes: [{
+								display: true,
+								ticks: {
+									beginAtZero: true,
+									steps: 10,
+								},
+								scaleLabel: {
+									display: true,
+									labelString: 'Doanh thu'
+								}
+							}]
+					},
+				},
+			});
+			if (myChart) myChart.destroy();
+		}, function(response){
+				console.log(response.data);
+		});	
+	}
+});
+
+

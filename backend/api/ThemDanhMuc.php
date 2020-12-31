@@ -10,6 +10,12 @@
 	else
 		$tendanhmuc = "";
 
+	$sql = "select count (*) from `danhmuc` where `danhmuc`.`tendanhmuc` = '$tendanhmuc'";
+	$check = $m->ExecuteNonquery($sql);
+	if ($check > 0){
+		die();
+	}
+
 	$sql = "INSERT INTO `danhmuc` (`id`, `tendanhmuc`) VALUES (NULL, '$tendanhmuc');";
 
 	$result = $m->ExecuteNonquery($sql);

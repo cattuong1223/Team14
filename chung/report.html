@@ -1,0 +1,82 @@
+
+    <div class="page-title">
+                <div class="title_left">
+                    <h3 style="color: #1B5E20"><i class="fa fa-bar-chart-o"></i> Thống kê hoạt động</h3>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            
+            <!-- Date input -->
+            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-12">
+                <div class="x1" style="margin-bottom: 40px;">
+                    <div>
+                        <h4>Thống kê từ ngày:</h4>
+                        <input type="date" class="form-control" id="inputSuccess3" ng-model="timebd">
+                       <input id="tgbd" type="hidden" value="{{timebd | date:'dd/MM/yyyy'}}">
+                    </div>
+                </div>   
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-12">
+                <div class="x1" style="margin-bottom: 40px;">
+                    <div>
+                        <h4>Tới ngày:</h4>
+                        <input type="date" class="form-control" id="inputSuccess3" ng-model="timekt">
+                       <input id="tgkt" type="hidden" value="{{timekt | date:'dd/MM/yyyy'}}">
+                    </div>
+                </div>   
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-4 col-xs-12">
+                <div class="x2" style="margin-bottom: 40px;"></div>
+                    <div class="select">
+                    <button class="btn btn-block btn-primary" ng-click="xuat()"> <i class="fas fa-filter"></i> Thống kê</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="work-day">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                          <div class="report-box r2" style="background: #1B5E20">
+                              <div class="report-icon">
+                                  <i class="far fa-money-bill-alt"></i>
+                              </div>
+                              <div class="report-data">
+                                  <h4 >Tổng Số Hóa Đơn :<span> {{tonghoadon}}</span> </h4> 
+                              </div>
+                          </div>
+                    </div> <!-- end col -->
+
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="report-box r3">
+                            <div class="report-icon">
+                                <i class="fas fa-chart-area"></i>
+                            </div>
+                            <div class="report-data">
+                                <h4 >Tổng Doanh Thu :<span>{{doanhthu | number}} đ</span> </h4> 
+                            </div> 
+                        </div>
+                    </div> <!-- end col -->
+
+                </div> <!-- end row -->
+            </div> <!-- end work-day  -->
+
+            <div class="clearfix"></div>
+
+            <div class="title_left" style="margin-top: 2rem">
+                <h3 style="color: #1B5E20;display: inline;"><i class="fa fa-bar-chart-o"></i> Biểu đồ doanh thu năm</h3>
+                <input id="namTK" type="number" min="2010" max="2020" step="1" value="2020" style="margin-left:2rem;display: inline;">
+                <button class="btn btn-inline btn-primary" ng-click="xuatChart()" style="margin-left:2rem;"> <i class="fas fa-filter"></i> Thống kê</button>
+            </div>
+
+            <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12" id="chart-container" style="margin: 5rem;">
+                <canvas id="myChart"></canvas>
+            </div>
+
+            
+
+            
+
