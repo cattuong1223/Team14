@@ -22,12 +22,6 @@
 		$quyen = $_POST['quyen'];
 	else
 		$quyen = null;
-	$sql = "select count (*) from `taikhoan` where `taikhoan`.`email` = '$email'";
-	$checkEmail = $m->ExecuteNonquery($sql);
-	if ($checkEmail > 0){
-		echo "Email trung!";
-		die();
-	}
 
 	$sql = "INSERT INTO `taikhoan` (`id`, `tennhanvien`, `email`, `matkhau`, `level`, `ngaytao`, `ngayupdate`) VALUES (NULL, '$tennhanvien', '$email', '$matkhau', '$quyen', NULL, NULL)";
 
