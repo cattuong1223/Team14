@@ -18,4 +18,4 @@
 5. Sales Statistics
 
 
-##© 2021 HCMUS.  All rights reserved.
+## © 2021 HCMUS.  All rights reserved.
